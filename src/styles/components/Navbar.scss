@@ -1,0 +1,70 @@
+@import '../Variables.scss';
+
+.navbar {
+    position: sticky;
+    z-index: 40;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(0.8);
+
+    border-bottom: 1px solid $off-white-translucent;
+
+    &-container {
+        padding: 1rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+
+            .logo-icon {
+                color: white;
+                background-color: $teal;
+                box-shadow: $teal-dark 0px 4px 6px -1px;
+                padding: 0.5rem;
+                border-radius: 0.75rem;
+
+                .logo-arrow {
+                    display: block;
+                    vertical-align: middle;
+                }
+            }
+
+            h1 {
+                color: $text-main;
+                letter-spacing: -0.025em;
+                font-weight: 700;
+                font-size: 1.25rem;
+                line-height: 1.75rem;
+
+                span {
+                    color: $teal;
+                }
+            }
+        }
+
+        // Location Selector
+        .location {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            gap: 0.5rem;
+
+            color: $text-sub;
+            background-color: $light-yellow-translucent;
+            border: 1px solid $off-white-translucent;
+            border-radius: 9999px;
+
+            font-size: 0.75rem;
+            font-weight: 700;
+
+            .map-pin {
+                color: $teal;
+            }
+        }
+    }
+}

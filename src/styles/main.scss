@@ -1,0 +1,12 @@
+@import 'base';
+@import 'variables';
+@import 'mixins';
+@import 'typography';
+
+@import './components/navbar';
+@import './components/travelapp';
+@import './components/filters';
+
+// h1 {
+//     color: red;
+// }

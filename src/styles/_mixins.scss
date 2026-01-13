@@ -1,0 +1,59 @@
+// Mixins
+@mixin section-styles($align: center) {
+    .section-header {
+        text-align: $align;
+        max-width: 700px;
+        margin: 0 auto 80px;
+
+        .sub-heading {
+            color: $brand-red;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .main-heading {
+            font-size: 2rem;
+            line-height: 2.7rem;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            font-weight: 800;
+
+            @include respond-to($break-md) {
+                font-size: 3rem;
+                line-height: 4.5rem;
+            }
+        }
+    }
+}
+
+@mixin sub-heading {
+    color: $brand-red;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    display: block;
+}
+
+// Breakpoints mixins for ranges
+// @mixin respond-to($breakpoint) {
+//   @media (max-width: ($breakpoint - 1px)) {
+//     @content;
+//   }
+// }
+
+@mixin respond-to($breakpoint) {
+  @media (min-width: ($breakpoint)) {
+    @content;
+  }
+}
+
+@mixin respond-to-min-max($min, $max) {
+  @media (min-width: $min) and (max-width: ($max - 1px)) {
+    @content;
+  }
+}

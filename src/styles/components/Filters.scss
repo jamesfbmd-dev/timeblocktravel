@@ -1,0 +1,14 @@
+@import '../Variables.scss';
+
+.filters-wrapper {
+    background-color: $off-white-translucent;
+    border-radius: 12px;
+    padding: 0.25rem;
+
+    .filter-button {
+        background-color: $white;
+        color: $teal;
+        padding: 0.5rem 1rem;
+        border-radius: 12px;
+    }
+}
