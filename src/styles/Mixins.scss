@@ -29,6 +29,29 @@
     }
 }
 
+@mixin duration-badge-styles {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    border-radius: 5px;
+}
+
+// Duration Badge Colours (can use 'quick-hit', 'half-day', or 'full-day')
+@mixin duration-badge-colors($duration) {
+  $styles: map-get($duration-badge-colors, $duration);
+
+  @if $styles {
+    background-color: map-get($styles, bg);
+    color: map-get($styles, text);
+    border: 1px solid map-get($styles, border);
+  } @else {
+    @warn "No duration styles found for `#{$duration}`";
+  }
+}
+
+
 @mixin sub-heading {
     color: $brand-red;
     font-weight: 700;
@@ -39,12 +62,6 @@
     display: block;
 }
 
-// Breakpoints mixins for ranges
-// @mixin respond-to($breakpoint) {
-//   @media (max-width: ($breakpoint - 1px)) {
-//     @content;
-//   }
-// }
 
 @mixin respond-to($breakpoint) {
   @media (min-width: ($breakpoint)) {
@@ -56,4 +73,15 @@
   @media (min-width: $min) and (max-width: ($max - 1px)) {
     @content;
   }
+}
+
+@mixin text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+@mixin icon-sm {
+    height: 14px;
+    width: 14px;
+    margin-right: 0.25rem;
 }

@@ -7,6 +7,7 @@
 @import './components/travelapp';
 @import './components/filters';
 
-// h1 {
-//     color: red;
-// }
+.app {
+    background-color: $bg-color;
+    min-height: 100vh;
+}

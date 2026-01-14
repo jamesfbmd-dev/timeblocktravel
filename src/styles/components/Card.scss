@@ -1,0 +1,139 @@
+@import '../Variables.scss';
+@import '../Mixins.scss';
+
+.card {
+    background-color: $white;
+    border: 1px solid $light-grey-border;
+    border-radius: 2.5rem;
+    padding: 2.5rem;
+
+    &-top-info {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+
+        .duration-badge {
+            @include duration-badge-styles;
+            // padding: 0.25rem 0.75rem;
+            // font-size: 0.7rem;
+            // letter-spacing: 0.1rem;
+            // font-weight: 900;
+            // text-transform: uppercase;
+            // border-radius: 5px;
+            
+            &.quick-hit {
+                @include duration-badge-colors("quick-hit");
+            }
+            &.half-day {
+                @include duration-badge-colors("half-day");
+            }
+            &.full-day {
+                @include duration-badge-colors("full-day");
+            }            
+        }
+        .time {
+            display: flex;
+            align-items: center;
+
+            .time-icon {
+                @include icon-sm;
+                color: $text-sub;
+            }
+            p {
+                font-size: 0.75rem;
+                font-weight: 700;
+                color: $text-sub;
+            }
+        }
+    }
+
+    &-title {
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }    
+    }
+    &-description {
+        p {
+            @include text-sm;
+            color: $text-sub;
+            margin-bottom: 1rem;
+        }
+    }
+    &-tip {
+        margin-bottom: 1rem;
+        padding: 1rem;
+        background-color: $light-yellow;
+        border: 1px solid $light-yellow-border;
+        border-radius: 1rem;
+
+        &-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+
+            .info-icon {
+                color: $teal;
+                @include icon-sm;
+            }
+
+            p {
+                color: $teal;
+                font-size: 10px;
+                font-weight: 900;
+                text-transform: capitalize;
+            }
+        }
+        &-content {
+            p {
+                color: $text-sub;
+                font-size: 0.75rem;
+                font-weight: 500;
+            }
+        }
+    }
+    &-footer {
+        display: flex;
+        justify-content: space-between;
+
+        &-location {
+            display: flex;
+            align-items: center;
+            margin-right: 0.25rem;
+
+            .location-icon {
+                color: $teal;
+                @include icon-sm;
+            }
+
+            .location-text {
+                color: $text-sub;
+                font-weight: 700;
+                font-size: 0.75rem;
+                text-transform: uppercase;
+            }
+        }
+        &-arrow {
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 9999px;
+            background-color: $dark-blue;
+            padding: 0.5rem;
+            transition: 200ms;
+
+            &:hover {
+                transform: scale(1.05);
+            }
+
+            .arrow-icon {
+                margin: none;
+                color: $white;
+            }
+        }
+    }
+}

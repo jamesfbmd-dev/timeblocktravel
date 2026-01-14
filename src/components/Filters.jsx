@@ -1,13 +1,30 @@
-import React from 'react';
+import { useState } from 'react';
+import { Sparkles, Zap, Coffee, Sun } from "lucide-react";
+
+
 import '../styles/components/Filters.scss';
 
-export default function Filters() {
+
+const filters = [
+  { id: "all", label: "All", icon: Sparkles },
+  { id: "short", label: "< 2 Hours", icon: Zap },
+  { id: "half", label: "Half-Day", icon: Coffee },
+  { id: "full", label: "Full-Day", icon: Sun },
+];
+
+export default function Filters({ activeFilter, setActiveFilter }) {
+
   return (
-        <div className="filters-wrapper">
-            <button className="filter-button">All</button>
-            <button className="filter-button">&lt; 2 Hours</button>
-            <button className="filter-button">Half-Day</button>
-            <button className="filter-button">Full-Day</button>
-        </div>
+      <div className="filters-wrapper">
+          {filters.map( ({id, label, icon: Icon}) => (
+              <button
+                  key={id}
+                  className={`filter-button ${activeFilter === id ? "active" : ""}`}
+                  onClick={() => setActiveFilter(id)}>
+                  <Icon className="filter-button-icon" />
+                  {label}
+              </button> 
+          ))}
+      </div>
   );
 }

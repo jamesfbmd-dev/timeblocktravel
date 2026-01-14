@@ -1,62 +1,45 @@
+// COLOURS
 $bg-color: #F9FAFB;
 $white: #ffffff;
 $off-white: #CBD5E1;
 $off-white-translucent: #CBD5E140;
+$light-grey: #F3F6F8;
+$light-grey-border: #ECEFF3;
+
+$grey: #F4F6F8;
 
 $text-main: #1F2933;
 $text-sub: #475569;
 
 $teal: #14B8A6;
 $teal-dark: #0D9488;
-$light-yellow: #F1E9DA;
-$light-yellow-translucent: #F1E9DA60;
+$teal-translucent: rgba(20, 184, 166, 0.063);
 
-// bg: "#F9FAFB",
-//   card: "#FFFFFF",
-//   textMain: "#1F2933",
-//   textSub: "#475569",
-//   border: "#CBD5E1",
-//   primary: "#14B8A6",
-//   primaryHover: "#0D9488",
-//   surface: "#F1E9DA",
-//   badges: {
-//     gold: { text: "#B45309", bg: "#FFFBEB", border: "#FDE68A" },
-//     coral: { text: "#E11D48", bg: "#FFF1F2", border: "#FECDD3" },
-//     midnight: { text: "#1E3A8A", bg: "#EFF6FF", border: "#BFDBFE" }
-//   }
+$light-yellow-border: #F1E9DA;
+$light-yellow: #f8f6f0;
 
-// // Brand Colors
-// $brand-red: #BD061A;
-// $brand-dark: #960414;
-// $brand-light: #f43f5e;
+$dark-blue: #1f2933;
 
-// // Neutral Colors
-// $navy-dark: #0f172a;
-// $navy-deep: #020617;
-// $slate-text: #64748b;
-// $bg-light: #f8fafc;
-// $white: #ffffff;
+// Duration Badge Colours
+$duration-badge-colors: (
+  "quick-hit": (
+    bg: #FFFBEB,
+    text: #B45309,
+    border: #FDE68A
+  ),
+  "half-day": (
+    bg: #FFF1F2,
+    text: #E11D48,
+    border: #FECDD3
+  ),
+  "full-day": (
+    bg: #EFF6FF,
+    text: #1E3A8A,
+    border: #BFDBFE
+  )
+);
 
-// // Shadows
-// $shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-// $shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
-// $shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-// $shadow-brand: 0 10px 15px -3px rgba(189, 6, 26, 0.25);
 
-// // Radii
-// $radius-lg: 24px;
-// $radius-md: 16px;
-// $radius-sm: 10px;
-// $radius-full: 50px;
-
-// // Layout
-// $container-max: 1200px;
-
-// // Transitions
-// $transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-
-// // breakpoints
-// $break-xs: 0px;       // base styles
-// $break-sm: 560px;     // small screens
-// $break-md: 768px;     // tablets
-// $break-lg: 1040px;    // desktops
+//SPACING
+//Used for spacing between icons and content (such as icons and text on a button for example)
+$icon-gap: 0.5rem;
