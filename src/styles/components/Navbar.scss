@@ -57,6 +57,7 @@
 
             // Location Info
             .location {
+                cursor: pointer;
                 display: flex;
                 align-items: center;
                 padding: 0.5rem 1rem;
@@ -77,6 +78,7 @@
 
             // Location Dropdown
             .location-dropdown {
+                cursor: pointer;
                 position: absolute;
                 top: calc(100% + 0.5rem);
                 left: 0;
