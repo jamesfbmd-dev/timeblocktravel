@@ -76,15 +76,22 @@
                 position: absolute;
                 top: calc(100% + 0.5rem);
                 left: 0;
+                z-index: 20;
+
+                width: max-content;
+                min-width: 100%;
+
                 display: flex;
                 flex-direction: column;
+                
                 gap: 0.25rem;
                 padding: 0.25rem;
+                
                 background-color: $light-yellow;
                 border: 1px solid $off-white-translucent;
                 border-radius: 1.25rem;
                 box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-                z-index: 20;
+                
 
                 .location-option {
                     display: flex;
@@ -96,6 +103,7 @@
                     font-size: 0.75rem;
                     font-weight: 700;
                     color: $text-sub;
+                    white-space: nowrap;
                     cursor: pointer;
                     transition: background-color 150ms ease;
 
