@@ -32,9 +32,7 @@ export default function Categories({ activeCategories, setActiveCategories}) {
           <button
               onClick={() => setActiveCategories([])}
               className={`categories-button categories-button-all ${ activeCategories.length === 0 ? "active" : "" }`}
-          >
-            {/*<Check className="categories-button-all-icon"/>*/}
-            All { activeCategories.length === 0 ? <X size={14} className="ml-1 opacity-60 hover:opacity-100" /> : "" }
+          >All
           </button>
           {categories.map((cat) => (
             <button

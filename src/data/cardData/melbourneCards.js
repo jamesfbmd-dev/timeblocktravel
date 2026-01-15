@@ -2,6 +2,7 @@ const melbourneCards = [
     {
       id: "mel-1",
       title: "The Hosier Lane Shuffle",
+      img: "https://images.unsplash.com/photo-1718327143264-7906b9d934ac?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       duration: "quick-hit",
       time: "45m",
       categories: ["culture", "food"],
@@ -18,6 +19,7 @@ const melbourneCards = [
     {
       id: "mel-2",
       title: "The Botanical Bat-Watch",
+      img: "https://images.unsplash.com/photo-1670027537688-77def132d556?q=80&w=3732&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       duration: "quick-hit",
       time: "1.5h",
       categories: ["nature", "animals"],
@@ -34,6 +36,7 @@ const melbourneCards = [
     {
       id: "mel-3",
       title: "Fitzroy 'Op-Shop' Loop",
+      img: "https://images.unsplash.com/photo-1672730399038-beac87ff9368?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       duration: "half-day",
       time: "4h",
       categories: ["shopping", "culture"],
@@ -50,7 +53,8 @@ const melbourneCards = [
     {
       id: "mel-4",
       title: "The St Kilda Penguin Run",
-      duration: "full-day",
+      img: "https://images.unsplash.com/photo-1639903296205-9f0109877ea9?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      duration: "quick-hit",
       time: "3h",
       categories: ["nature", "animals", "adventure"],
       description: "Tram 96 to the beach. Walk the pier at dusk to find the colony of tiny fairy penguins living in the breakwater rocks.",
@@ -66,6 +70,7 @@ const melbourneCards = [
     {
       id: "mel-5",
       title: "Queen Vic Market Backstreets Bite",
+      img: "https://images.unsplash.com/photo-1569846567041-789685cd9e90?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       duration: "quick-hit",
       time: "1h",
       categories: ["food", "culture"],
@@ -82,6 +87,7 @@ const melbourneCards = [
     {
       id: "mel-6",
       title: "Abbotsford Convent Slow Loop",
+      img: "https://plus.unsplash.com/premium_photo-1663126568569-bfb3be850709?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       duration: "half-day",
       time: "3h",
       categories: ["nature", "culture"],
@@ -98,6 +104,7 @@ const melbourneCards = [
     {
       id: "mel-7",
       title: "Brighton Bathing Box Coast Walk",
+      img: "https://images.unsplash.com/photo-1689920620019-dd1b456680f5?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       duration: "half-day",
       time: "2.5h",
       categories: ["nature", "photography"],
@@ -114,6 +121,7 @@ const melbourneCards = [
     {
       id: "mel-8",
       title: "Yarra Bend Bushland Escape",
+      img: "https://plus.unsplash.com/premium_photo-1757872315675-b4324c1cfb30?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       duration: "half-day",
       time: "4h",
       categories: ["nature", "adventure", "animals"],
@@ -130,6 +138,7 @@ const melbourneCards = [
     {
       id: "mel-9",
       title: "Healesville Sanctuary Day Trip",
+      img: "https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?q=80&w=2969&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       duration: "full-day",
       time: "6h",
       categories: ["animals", "nature"],
@@ -146,6 +155,7 @@ const melbourneCards = [
     {
       id: "mel-10",
       title: "Great Ocean Road Highlights",
+      img: "https://images.unsplash.com/photo-1578285058791-4110cc60f2cf?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       duration: "full-day",
       time: "12h",
       categories: ["nature", "adventure"],
