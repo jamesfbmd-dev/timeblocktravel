@@ -254,50 +254,50 @@
       }
 
       .tour-link {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      
-      padding: 1rem;
-      margin-top: 1rem;
-
-      background-color: $light-grey;
-      border: 1px solid $light-grey-border;
-      border-radius: 18px;
-
-      .tour-wrapper {
         display: flex;
         align-items: center;
+        justify-content: space-between;
+        
+        padding: 1rem;
+        margin-top: 1rem;
 
-        .tour-icon {
+        background-color: $light-grey;
+        border: 1px solid $light-grey-border;
+        border-radius: 18px;
+
+        .tour-wrapper {
           display: flex;
-          justify-content: center;
           align-items: center;
-          padding: 0.5rem;
-          background-color: #f0fdfa;
-          border-radius: 5px;
-          margin-right: $icon-gap;
 
-          .ticket-icon {
-            color: $teal;
+          .tour-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.5rem;
+            background-color: #f0fdfa;
+            border-radius: 5px;
+            margin-right: $icon-gap;
+
+            .ticket-icon {
+              color: $teal;
+            }
           }
-        }
-        .tour-details {
-          display: flex;
-          flex-direction: column;
+          .tour-details {
+            display: flex;
+            flex-direction: column;
 
-          .tour-name {
-            @include text-sm;
-            font-weight: 700;
-          }
+            .tour-name {
+              @include text-sm;
+              font-weight: 700;
+            }
 
-          .tour-info {
-            font-size: 0.8rem;
-            color: $text-sub;
+            .tour-info {
+              font-size: 0.8rem;
+              color: $text-sub;
+            }
           }
         }
       }
-    }
     }
 
     /* --- CLOSE BUTTON --- */
