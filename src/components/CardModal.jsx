@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import {
   X,
   Clock,
@@ -6,6 +8,9 @@ import {
   MapPin,
   Navigation,
   Sparkles,
+  Compass,
+  Ticket,
+  ChevronRight
 } from "lucide-react";
 
 import "../styles/components/CardModal.scss";
@@ -21,7 +26,13 @@ export default function CardModal({ card, onClose }) {
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
-      <div className="modal" onClick={(e) => e.stopPropagation()}>
+      <div id="card-modal" className="modal" onClick={(e) => e.stopPropagation()}>
+
+
+        <div className="modal-images-container">
+          <img src={card.img ?? "https://placehold.co/600x400"} />
+        </div>
+
         {/* Close button */}
         <div className="modal-header">
             <div className={`duration-badge ${card.duration}`}>
@@ -34,39 +45,55 @@ export default function CardModal({ card, onClose }) {
 
 
         {/* Header */}
-        <h2>{card.title}</h2>
+        <div className="modal-title">
+          <h2>{card.title}</h2>  
+        </div>
+        
 
         {/* Stats row */}
         <div className="modal-stats">
           <div className="stat">
             <Clock />
-            <span>TIME</span>
-            <strong>{card.time}</strong>
+            <span className="stat-title">TIME</span>
+            <strong className="stat-content">{card.time}</strong>
           </div>
 
           <div className="stat">
             <Wallet />
-            <span>COST</span>
-            <strong>{card.cost ?? "Free"}</strong>
+            <span className="stat-title">COST</span>
+            <strong className="stat-content">{card.cost ?? "Free"}</strong>
           </div>
 
           <div className="stat">
             <Zap />
-            <span>VIBE</span>
-            <strong>{card.vibe ?? "Relaxed"}</strong>
+            <span className="stat-title">VIBE</span>
+            <strong className="stat-content">{card.vibe ?? "Relaxed"}</strong>
           </div>
         </div>
 
         {/* Context */}
-        <p className="section-title">THE CONTEXT</p>
-        <p className="section-content">{card.longDescription}</p>
+        <div className="modal-context">
+          <h4 className="section-title">THE CONTEXT</h4>
+          <p className="section-content">{card.longDescription}</p>  
+        </div>
 
         {/* Logistics */}
-        <p className="section-title">LOGISTICS</p>
+        <h4 className="section-title">LOGISTICS</h4>
         <div className="logistics">
           <div className="row">
-            <MapPin />
-            <p>{card.location}</p>
+            <MapPin size={18}/>
+            <div className="content-wrapper">
+              <span className="title">Address</span>
+              <p className="content">{card.location}</p>  
+            </div>
+          </div>
+
+          <div className="row">
+            <Navigation size={18}/>
+            <div className="content-wrapper">
+              <span className="title">How to get there</span>
+              <p className="content">{card.logistics}</p>  
+            </div>
           </div>
 
           {card.howToReach && (
@@ -87,6 +114,48 @@ export default function CardModal({ card, onClose }) {
             <p>"{card.tip}"</p>
           </div>
         )}
+
+        <div className="divider" />
+
+        <div className="curated">
+          <div className="curated-header">
+            <Compass className="compass-icon" size={18}/>
+            <h4 className="section-title">CURATED EXPERIENCES</h4>  
+          </div>
+
+          <div className="curated-header">
+            <p>Prefer it pre-planned? These professional tours cover similar ground or include this location as part of a deeper dive.</p>
+          </div>
+
+          <a key="{idx}" href="#" className="tour-link">
+            <div className="tour-wrapper flex items-center gap-3">
+              <div className="tour-icon">
+                <Ticket className="ticket-icon" size={16} />
+              </div>
+              <div className="tour-details">
+                <div className="tour-name">Sample Tour</div>
+                <div className="tour-info">GETYOURGUIDE • FROM $79</div>
+              </div>
+            </div>
+            <ChevronRight size={18} className="text-slate-300 group-hover:text-teal-600 transition-colors" />
+          </a>
+
+          <a key="{idx}" href="#" className="tour-link">
+            <div className="tour-wrapper flex items-center gap-3">
+              <div className="tour-icon">
+                <Ticket className="ticket-icon" size={16} />
+              </div>
+              <div className="tour-details">
+                <div className="tour-name">Sample Tour</div>
+                <div className="tour-info">VIATOR • FROM $109</div>
+              </div>
+            </div>
+            <ChevronRight size={18} className="text-slate-300 group-hover:text-teal-600 transition-colors" />
+          </a>
+
+        </div>
+        
+
       </div>
     </div>
   );

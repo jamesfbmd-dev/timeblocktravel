@@ -5,7 +5,24 @@
     background-color: $white;
     border: 1px solid $light-grey-border;
     border-radius: 2.5rem;
-    padding: 2.5rem;
+    overflow: hidden;
+    // padding: 2.5rem;
+
+    .card-img {
+        height: 180px;
+        overflow: hidden;
+
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        display: block;
+      }
+    }
+
+    &-content {
+        padding: 2.5rem;
+    }
 
     &-top-info {
         width: 100%;
@@ -16,12 +33,6 @@
 
         .duration-badge {
             @include duration-badge-styles;
-            // padding: 0.25rem 0.75rem;
-            // font-size: 0.7rem;
-            // letter-spacing: 0.1rem;
-            // font-weight: 900;
-            // text-transform: uppercase;
-            // border-radius: 5px;
             
             &.quick-hit {
                 @include duration-badge-colors("quick-hit");
