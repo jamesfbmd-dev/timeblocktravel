@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Check, X, Info, MapPin, Clock, ArrowRight } from "lucide-react";
 
 
@@ -6,7 +6,9 @@ import '../styles/components/Card.scss';
 
 
 // { card } is the indivudual card object from the cards array js file.
-export default function Card( { card, onOpen }) {
+export default function Card( { card }) {
+
+    const navigate = useNavigate();
 
     const DURATION_LABELS = {
         "quick-hit": "Quick Hit",
@@ -49,7 +51,7 @@ export default function Card( { card, onOpen }) {
                         <MapPin className="location-icon"/>
                         <p className="location-text">{card.location}</p>
                     </div>
-                    <div className="card-footer-arrow" onClick={onOpen}>
+                    <div className="card-footer-arrow" onClick={() => navigate(`cards/${card.id}`)}>
                         <ArrowRight className="arrow-icon" size={18} />
                     </div>
                 </div>

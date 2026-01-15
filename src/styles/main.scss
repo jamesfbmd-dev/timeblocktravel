@@ -1,11 +1,11 @@
-@import 'base';
-@import 'variables';
-@import 'mixins';
-@import 'typography';
+@import './Base.scss';
+@import './Variables.scss';
+@import './Mixins.scss';
+@import './_typography.scss';
 
-@import './components/navbar';
-@import './components/travelapp';
-@import './components/filters';
+@import './components/Navbar.scss';
+@import './components/Travelapp.scss';
+@import './components/Filters.scss';
 
 .app {
     background-color: $bg-color;
