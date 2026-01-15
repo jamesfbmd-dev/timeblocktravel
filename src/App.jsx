@@ -5,10 +5,16 @@ import TravelApp from './components/TravelApp';
 // import './styles/main.scss';
 
 function App() {
+
+  const [activeCity, setActiveCity] = useState("melbourne");
+
   return (
     <div className="app">
-      <Navbar />
-      <TravelApp />
+      <Navbar
+        activeCity={activeCity}
+        setActiveCity={setActiveCity}
+      />
+      <TravelApp activeCity={activeCity} />
     </div>
   );
 }
