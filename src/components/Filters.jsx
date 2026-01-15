@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Sparkles, Zap, Coffee, Sun } from "lucide-react";
 
 
@@ -16,13 +15,13 @@ export default function Filters({ activeFilter, setActiveFilter }) {
 
   return (
       <div className="filters-wrapper">
-          {filters.map( ({id, label, icon: Icon}) => (
+          {filters.map( (filter) => (
               <button
-                  key={id}
-                  className={`filter-button ${activeFilter === id ? "active" : ""}`}
-                  onClick={() => setActiveFilter(id)}>
-                  <Icon className="filter-button-icon" />
-                  {label}
+                  key={filter.id}
+                  className={`filter-button ${activeFilter === filter.id ? "active" : ""}`}
+                  onClick={() => setActiveFilter(filter.id)}>
+                  <filter.icon className="filter-button-icon" />
+                  {filter.label}
               </button> 
           ))}
       </div>

@@ -16,6 +16,20 @@ import {
 import "../styles/components/CardModal.scss";
 
 export default function CardModal({ card, onClose }) {
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [onClose]);
+
   if (!card) return null;
 
   const DURATION_LABELS = {

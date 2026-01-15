@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSearchParams, useNavigate, Routes, Route, useParams } from 'react-router-dom';
 import Filters from './Filters';
 import Categories from './Categories';
 import Card from './Card';
@@ -9,11 +10,41 @@ import melbourneCards from '../data/cardData/melbourneCards.js';
 
 
 
+function CardModalWrapper() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const card = melbourneCards.find(c => c.id === id);
+
+  return <CardModal card={card} onClose={() => navigate("/")} />;
+}
+
 export default function TravelApp() {
 
-  const [activeFilter, setActiveFilter] = useState("all");
-  const [activeCategories, setActiveCategories] = useState([]);
-  const [selectedCard, setSelectedCard] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [activeFilter, setActiveFilter] = useState(searchParams.get("duration") || "all");
+  const [activeCategories, setActiveCategories] = useState(searchParams.get("categories")?.split(",") || []);
+
+  const handleFilterChange = (filter) => {
+    setActiveFilter(filter);
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("duration", filter);
+    setSearchParams(newParams);
+  };
+
+  const handleCategoriesChange = (updater) => {
+    setActiveCategories(prev => {
+      const newCategories = typeof updater === 'function' ? updater(prev) : updater;
+      const newParams = new URLSearchParams(searchParams);
+      if (newCategories.length > 0) {
+        newParams.set("categories", newCategories.join(","));
+      } else {
+        newParams.delete("categories");
+      }
+      setSearchParams(newParams);
+      return newCategories;
+    });
+  };
 
 
   const filteredCards = melbourneCards.filter(card => {
@@ -35,18 +66,18 @@ export default function TravelApp() {
   return (
     <div className="travel-app">
       <div className="container">
-          <Filters activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
-          <Categories activeCategories={activeCategories} setActiveCategories={setActiveCategories} />
+          <Filters activeFilter={activeFilter} setActiveFilter={handleFilterChange} />
+          <Categories activeCategories={activeCategories} setActiveCategories={handleCategoriesChange} />
           <div className="cards-wrapper">
             {filteredCards.map(card => ( 
-              <Card key={card.id} card={card} onOpen={() => setSelectedCard(card)}/>
+              <Card key={card.id} card={card} />
             ))
             }
           </div>
-          <CardModal
-            card={selectedCard}
-            onClose={() => setSelectedCard(null)}
-          />
+
+          <Routes>
+            <Route path="cards/:id" element={<CardModalWrapper />} />
+          </Routes>
       </div>
     </div>
   );
