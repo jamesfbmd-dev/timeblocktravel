@@ -82,13 +82,13 @@
         @include duration-badge-styles;
 
         &.quick-hit {
-             @include duration-badge-colors("quick-hit");
+          @include duration-badge-colors("quick-hit");
         }
         &.half-day {
           @include duration-badge-colors("half-day");
         }
         &.full-day {
-            @include duration-badge-colors("full-day");
+          @include duration-badge-colors("full-day");
         }
       }
     }
