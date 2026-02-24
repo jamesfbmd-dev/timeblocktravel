@@ -29,6 +29,29 @@
     }
 }
 
+
+// BUTTONS
+@mixin primary-button {
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    background-color: $teal;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+@mixin secondary-button {
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    background-color: $light-grey;
+    color: $text-sub;
+    border: 1px solid $light-grey-border;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+// BADGES
 @mixin duration-badge-styles {
     padding: 0.25rem 0.75rem;
     font-size: 0.7rem;

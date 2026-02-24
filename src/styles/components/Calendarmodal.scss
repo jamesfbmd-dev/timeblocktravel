@@ -1,0 +1,71 @@
+@import '../Variables.scss';
+@import '../Mixins.scss';
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    h3 { margin: 0; font-size: 1.2rem; }
+    .close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+  }
+
+  .modal-body {
+    margin-bottom: 24px;
+    label { display: block; margin-bottom: 8px; font-weight: bold; }
+    input { 
+      width: 100%; 
+      padding: 10px; 
+      border: 1px solid #ddd; 
+      border-radius: 4px; 
+      box-sizing: border-box; 
+    }
+  }
+
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    
+    .btn-secondary { 
+      @include secondary-button;
+    }
+    .btn-primary { 
+      @include primary-button;
+    }
+  }
+}
+
+// Style for the tags in the calendar cells
+.city-tag {
+  background: #e7f3ff;
+  color: #007bff;
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #cce5ff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -1,20 +1,22 @@
 import { useState } from 'react'
 import Navbar from './components/Navbar';
 import TravelApp from './components/TravelApp';
-// import './App.css'
-// import './styles/main.scss';
+import Calendar from './components/Calendar';
+import TripPlanner from './components/TripPlanner';
 
 function App() {
 
-  const [activeCity, setActiveCity] = useState("melbourne");
+  const [activeView, setActiveView] = useState('travel-library');
 
   return (
     <div className="app">
-      <Navbar
-        activeCity={activeCity}
-        setActiveCity={setActiveCity}
-      />
-      <TravelApp activeCity={activeCity} />
+      <Navbar activeView={activeView} setActiveView={setActiveView} />
+      { activeView === 'travel-library' && (
+        <TravelApp />
+      )}
+      { activeView === 'trip-planner' && (
+        <TripPlanner />
+      )}
     </div>
   );
 }

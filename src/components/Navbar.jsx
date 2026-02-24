@@ -1,16 +1,8 @@
 import { useState } from "react";
-import { Navigation, MapPin, ChevronDown } from 'lucide-react';
+import { Navigation, ChevronDown } from 'lucide-react';
 import '../styles/components/Navbar.scss';
 
-export default function Navbar( { activeCity, setActiveCity }) {
-
-    const [open, setOpen] = useState(false);
-
-    const CITY_LABELS = {
-        melbourne: "MELBOURNE, AU",
-        sydney: "SYDNEY, AU",
-    };
-
+export default function Navbar({ activeView, setActiveView }) {
 
   return (
     <nav className="navbar">
@@ -22,31 +14,9 @@ export default function Navbar( { activeCity, setActiveCity }) {
                 <h1>TimeBlock<span>Travel</span></h1>
             </div>
 
-            <div className="location-wrapper">
-              <button
-                className="location"
-                onClick={() => setOpen(!open)}
-              >
-                <MapPin className="map-pin" size={12} />
-                {CITY_LABELS[activeCity]}
-              </button>
-
-              {open && (
-                <div className="location-dropdown">
-                  {Object.entries(CITY_LABELS).map(([key, label]) => (
-                    <button
-                      key={key}
-                      className={`location-option ${key === activeCity ? "active" : ""}`}
-                      onClick={() => {
-                        setActiveCity(key);
-                        setOpen(false);
-                      }}
-                    >
-                      {label}
-                    </button>
-                  ))}
-                </div>
-              )}
+            <div className="view-selector">
+              <button className={ activeView === 'travel-library' ? 'active' : ''} onClick={ () => setActiveView('travel-library')}>Travel Library</button>
+              <button className={ activeView === 'trip-planner' ? 'active' : ''} onClick={ () => setActiveView('trip-planner')}>Trip Planner</button>
             </div>
         </div>
     </nav>
