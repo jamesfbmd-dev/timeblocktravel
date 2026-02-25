@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Calendar from './Calendar';
 import { db } from '../data/storage';
-import '../styles/components/Calendardashboard.scss';
+import '../styles/components/Tripplanner.scss';
 
 const CalendarDashboard = () => {
     const [view, setView] = useState('list'); // 'list' or 'calendar'
