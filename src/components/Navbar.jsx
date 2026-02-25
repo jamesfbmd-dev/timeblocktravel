@@ -13,7 +13,6 @@ export default function Navbar({ activeView, setActiveView }) {
                 </div>
                 <h1>TimeBlock<span>Travel</span></h1>
             </div>
-
             <div className="view-selector">
               <button className={ activeView === 'travel-library' ? 'active' : ''} onClick={ () => setActiveView('travel-library')}>Travel Library</button>
               <button className={ activeView === 'trip-planner' ? 'active' : ''} onClick={ () => setActiveView('trip-planner')}>Trip Planner</button>
