@@ -18,26 +18,30 @@ const Calendar = ({ trip, setItineraries, onBack }) => {
     "July", "August", "September", "October", "November", "December"
   ];
 
-  // Overwrite existing location for the day
-  const handleSaveCity = (location) => {
-    const newEvent = {
+  // ------------------------
+  // Save or overwrite a day's data
+  // ------------------------
+  const handleSaveDay = (dayData) => {
+    const newDay = {
       id: db.uid(),
-      location: { ...location }, // fully future-proof
-      meta: {}
+      ...dayData // accept any fields from dayDraft
     };
 
-    setItineraries(prev => ({
+    setItineraries((prev) => ({
       ...prev,
       [trip.id]: {
         ...prev[trip.id],
-        events: {
-          ...prev[trip.id].events,
-          [activeDate]: newEvent // overwrite instead of append
+        days: { // renamed from events -> days
+          ...prev[trip.id].days,
+          [activeDate]: newDay
         }
       }
     }));
   };
 
+  // ------------------------
+  // Click a calendar cell to open modal
+  // ------------------------
   const handleCellClick = (day) => {
     if (!day) return;
 
@@ -46,12 +50,14 @@ const Calendar = ({ trip, setItineraries, onBack }) => {
     setIsModalOpen(true);
   };
 
-  // Now returns a single event object (or null)
-  const getEventForDay = (day) => {
+  // ------------------------
+  // Get saved day data for a specific date
+  // ------------------------
+  const getDayForDate = (day) => {
     if (!day) return null;
 
     const dateKey = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-    return trip.events[dateKey] || null;
+    return trip.days?.[dateKey] || null; // renamed from events -> days
   };
 
   const blanks = Array.from({ length: firstDayOfMonth }, () => null);
@@ -121,7 +127,7 @@ const Calendar = ({ trip, setItineraries, onBack }) => {
 
       <div className="calendar-grid">
         {allSlots.map((day, index) => {
-          const event = getEventForDay(day);
+          const dayData = getDayForDate(day);
 
           return (
             <div
@@ -133,9 +139,9 @@ const Calendar = ({ trip, setItineraries, onBack }) => {
                 <>
                   <div className="day-number">{day}</div>
                   <div className="day-content">
-                    {event && (
-                      <div key={event.id} className="city-tag">
-                        {event.location.name}
+                    {dayData?.location && (
+                      <div key={dayData.id} className="location-tag">
+                        {dayData.location.name}
                       </div>
                     )}
                   </div>
@@ -149,9 +155,9 @@ const Calendar = ({ trip, setItineraries, onBack }) => {
       <CalendarModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onSave={handleSaveCity}
+        onSave={handleSaveDay}
         selectedDate={activeDate}
-        getEventForDay={getEventForDay}
+        getEventForDay={getDayForDate} // can rename prop in modal later if needed
       />
     </div>
   );

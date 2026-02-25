@@ -3,29 +3,45 @@ import '../styles/components/Calendarmodal.scss';
 import { db } from '../data/storage';
 
 const CalendarModal = ({ isOpen, onClose, onSave, selectedDate }) => {
-  const [query, setQuery] = useState('');
-  const [results, setResults] = useState([]);
-  const [selectedLocation, setSelectedLocation] = useState(null);
-  const [debouncedQuery, setDebouncedQuery] = useState('');
-  const [isFocused, setIsFocused] = useState(false); // track focus
+
   const containerRef = useRef(null);
 
-  // get previous location to prepopulate input
-  const dayData = db.getDay(selectedDate);
-  const prevLocation = dayData?.location?.name || '';
+  const [dayDraft, setDayDraft] = useState({
+    location: null,
+    notes: ''
+  });
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
+  const [debouncedQuery, setDebouncedQuery] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
 
-
-  // Debounce input
+  // ------------------------
+  // Prepopulate dayDraft when modal opens
+  // ------------------------
   useEffect(() => {
-    
-    // Update to delay or speed up data fetching as needed
-    const debounceBuffer = 300;
+    if (!isOpen) return;
 
-    const handler = setTimeout(() => setDebouncedQuery(query), debounceBuffer);
-    return () => clearTimeout(handler);
+    const savedDay = db.getDay(selectedDate);
+
+    setDayDraft({
+      location: savedDay?.location || null,
+      notes: savedDay?.notes || ''
+    });
+
+    setQuery(savedDay?.location?.name || '');
+  }, [isOpen, selectedDate]);
+
+  // ------------------------
+  // Debounce input for typeahead
+  // ------------------------
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedQuery(query), 300);
+    return () => clearTimeout(timer);
   }, [query]);
 
-  // Fetch results
+  // ------------------------
+  // Fetch typeahead results
+  // ------------------------
   useEffect(() => {
     if (!isFocused || debouncedQuery.length < 3) {
       setResults([]);
@@ -35,13 +51,15 @@ const CalendarModal = ({ isOpen, onClose, onSave, selectedDate }) => {
     const fetchLocations = async () => {
       try {
         const res = await fetch(
-          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(debouncedQuery)}&limit=5&addressdetails=1&accept-language=en&class=place&type=city&class=place&type=town`
+          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+            debouncedQuery
+          )}&limit=5&addressdetails=1&accept-language=en`
         );
+
         const data = await res.json();
-        console.log(data)
 
         const mapped = data.map((loc) => {
-          const city =
+          const base =
             loc.address?.city ||
             loc.address?.town ||
             loc.address?.village ||
@@ -51,83 +69,74 @@ const CalendarModal = ({ isOpen, onClose, onSave, selectedDate }) => {
           const state = loc.address?.state || '';
           const country = loc.address?.country || '';
 
-          const contructName = [city];
-          if (state) contructName.push(state);
-          if (country) contructName.push(country);
-
           return {
-            // name: country ? `${city}, ${country}` : city,
-            name: contructName.join(', '),
+            name: [base, state, country].filter(Boolean).join(', '),
             lat: loc.lat,
             lon: loc.lon,
-            place_id: loc.place_id,
+            place_id: loc.place_id
           };
         });
 
         setResults(mapped);
       } catch (err) {
-        console.error('Error fetching locations:', err);
+        console.error('Location fetch failed:', err);
       }
     };
 
     fetchLocations();
   }, [debouncedQuery, isFocused]);
 
-  // Hide dropdown when clicking outside
+  // ------------------------
+  // Close dropdown on outside click
+  // ------------------------
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (containerRef.current && !containerRef.current.contains(e.target)) {
+      if (!containerRef.current?.contains(e.target)) {
         setIsFocused(false);
         setResults([]);
       }
     };
+
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Prepopulate input field
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const dayData = db.getDay(selectedDate);
-    const prevLocationName = dayData?.location?.name || '';
-
-    setQuery(prevLocationName);
-    setSelectedLocation(
-      dayData?.location
-        ? { ...dayData.location, name: prevLocationName }
-        : null
-    );
-  }, [isOpen, selectedDate]);
-
+  // ------------------------
+  // Handlers
+  // ------------------------
   const handleSelect = (location) => {
-    setSelectedLocation({
+    const formatted = {
       name: location.name,
       lat: location.lat,
-      lon: location.lon,
-    });
+      lon: location.lon
+    };
+
+    setDayDraft((prev) => ({ ...prev, location: formatted }));
     setQuery(location.name);
-    setResults([]); // hide dropdown immediately
+    setResults([]);
+    setIsFocused(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (selectedLocation) {
-      onSave(selectedLocation);
-      setQuery('');
-      setSelectedLocation(null);
-      setResults([]);
-      onClose();
-    }
+    if (!dayDraft.location) return;
+
+    onSave(dayDraft);
+
+    // Reset state
+    setDayDraft({ location: null, notes: '' });
+    setQuery('');
+    setResults([]);
+    setIsFocused(false);
+
+    onClose();
   };
 
-  if (!isOpen) return null;
-
-  return (
+  return isOpen ? (
     <div className="modal-overlay">
       <div className="modal-content" ref={containerRef}>
         <div className="modal-header">
-          <h3>Add City to {selectedDate}</h3>
+          <h3>{selectedDate}</h3>
           <button className="close-btn" onClick={onClose}>
             &times;
           </button>
@@ -135,21 +144,20 @@ const CalendarModal = ({ isOpen, onClose, onSave, selectedDate }) => {
 
         <form onSubmit={handleSubmit}>
           <div className="modal-body">
-            <label htmlFor="city-input">City Name</label>
+            <label htmlFor="location-input">Location</label>
             <input
-              id="city-input"
+              id="location-input"
               type="text"
               value={query}
-              onFocus={() => setIsFocused(true)}  // only show dropdown when focused
-              onBlur={() => setIsFocused(false)}   // hide dropdown when unfocused
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
               onChange={(e) => {
                 setQuery(e.target.value);
-                setSelectedLocation(null);
+                setDayDraft((prev) => ({ ...prev, location: null }));
               }}
               placeholder="e.g. Sydney, Tokyo..."
-              autoFocus
             />
-             {/*Show dropdown only if there are results AND input is focused */}
+
             {isFocused && results.length > 0 && (
               <ul className="typeahead-dropdown">
                 {results.map((loc) => (
@@ -159,20 +167,34 @@ const CalendarModal = ({ isOpen, onClose, onSave, selectedDate }) => {
                 ))}
               </ul>
             )}
+
+            {/*<label htmlFor="notes">Notes</label>
+            <input
+              id="notes"
+              type="text"
+              value={dayDraft.notes}
+              onChange={(e) =>
+                setDayDraft((prev) => ({ ...prev, notes: e.target.value }))
+              }
+            />*/}
           </div>
 
           <div className="modal-footer">
             <button type="button" className="btn-secondary" onClick={onClose}>
               Cancel
             </button>
-            <button type="submit" className="btn-primary" disabled={!selectedLocation}>
-              Add to Trip
+            <button
+              type="submit"
+              className="btn-primary"
+              disabled={!dayDraft.location}
+            >
+              Save Day
             </button>
           </div>
         </form>
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default CalendarModal;
